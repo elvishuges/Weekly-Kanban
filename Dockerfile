@@ -1,11 +1,11 @@
-FROM nginx:alpine
+# Use an official web server image as a parent image
+FROM nginx:latest
 
-# Remove configuração padrão do nginx
-RUN rm /etc/nginx/conf.d/default.conf
+# Set the working directory to /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
 
-# Copia o index.html para o diretório público
-COPY index.html /usr/share/nginx/html/index.html
+# Copy the current directory contents into the container at /usr/share/nginx/html
+COPY . /usr/share/nginx/html
 
+# Expose port 80 to the world outside this container
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
